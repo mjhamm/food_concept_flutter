@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:food_concept_flutter/item%20screen/item_screen.dart';
 
 class RecommendedTile extends StatelessWidget {
 
@@ -16,22 +17,31 @@ class RecommendedTile extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-            width: MediaQuery.of(context).size.width / 1.5,
+            width: MediaQuery.of(context).size.width / 1.6,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  height: 160,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.green,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey[400],
-                        offset: Offset(2,2),
-                        blurRadius: 10
-                      )
-                    ]
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => ItemScreen()));
+                  },
+                                  child: Container(
+                    height: 160,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey[600],
+                          offset: Offset(3,3),
+                          blurRadius: 6
+                        )
+                      ]
+                    ),
+                    child: ClipRRect(
+                      child: Image.asset('assets/images/restaurant.jpg',
+                      fit: BoxFit.fitWidth,),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ),
                 Padding(

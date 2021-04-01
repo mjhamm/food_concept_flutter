@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:food_concept_flutter/start%20screen/recommended_tile.dart';
 
 class StartScreen extends StatelessWidget {
+
+  final List<String> foodItems = [
+    'Pasta', 'Sushi', 'Salads', 'Burgers', 'Chicken', 'Desserts'
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -83,7 +88,7 @@ class StartScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 24.0, left: 16.0, right: 16.0, bottom: 12.0),
+                    padding: const EdgeInsets.only(top: 24.0, left: 16.0, right: 16.0, bottom: 4.0),
                     child: Text(
                       'Something new',
                       style: TextStyle(
@@ -94,42 +99,18 @@ class StartScreen extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: 200,
+                    height: 220,
                     child: ListView.builder(
                       physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
-                      itemCount: 10,
+                      itemCount: foodItems.length,
                       itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(left: 16.0, right: 8.0),
-                          child: Container(
-                            height: 120,
-                            width: MediaQuery.of(context).size.width / 3,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.orange,
-                            ),
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 16.0, left: 8.0),
-                                child: Text(
-                                  'Pasta',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w800
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
+                        return SomethingNewTile(foodItems: foodItems, index: index,);
                       },
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 32.0, left: 16.0, right: 16.0, bottom: 12.0),
+                    padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0, bottom: 12.0),
                     child: Text(
                       'Recommended',
                       style: TextStyle(
@@ -156,6 +137,48 @@ class StartScreen extends StatelessWidget {
           )
         )
       ],
+    );
+  }
+}
+
+class SomethingNewTile extends StatelessWidget {
+
+  final List<String> foodItems;
+  final int index;
+
+  const SomethingNewTile({Key key, @required this.foodItems, @required this.index,}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0, left: 16.0, right: 8.0, bottom: 16.0),
+      child: Container(
+        height: 120,
+        width: MediaQuery.of(context).size.width / 3,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [BoxShadow(
+            color: Colors.grey[600],
+            offset: Offset(3,3),
+            blurRadius: 6
+          )],
+          color: Colors.orange,
+        ),
+        child: Align(
+          alignment: Alignment.topLeft,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 16.0, left: 8.0),
+            child: Text(
+              foodItems[index],
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w800
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
